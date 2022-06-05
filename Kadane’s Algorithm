@@ -1,0 +1,15 @@
+public static long maxSubarraySum(int[] nums, int n) {
+		// write your code here
+        long max=0;
+        long sum=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            sum=sum+nums[i];
+            max=Math.max(sum,max);
+            if(sum<0)
+            {
+                sum=0;
+            }
+        }
+        return max;
+	}
