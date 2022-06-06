@@ -1,0 +1,69 @@
+import java.util.* ;
+import java.io.*; 
+/*******************************************************
+
+    Following is the Interval class structure
+
+    class Interval {
+        int start, int finish;
+
+        Interval(int start, int finish) {
+            this.start = start;
+            this.finish = finish;
+        }
+    }
+    
+*******************************************************/
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Solution {
+    public static List<Interval> mergeIntervals(Interval[] intervals) {
+        // write your code here.
+          Arrays.sort(intervals,(a,b)->(a.start-b.start));
+        
+        Stack<ArrayList<Integer>> stack=new Stack<>();
+         ArrayList<Integer> a=new ArrayList<>();
+        a.add(intervals[0].start);
+       a.add(intervals[0].finish); 
+        
+        stack.push(a);
+        
+        for(int i=1;i<intervals.length;i++)
+        {
+            ArrayList<Integer> curr=stack.pop();
+            int start=intervals[i].start;
+            int end=intervals[i].finish;
+            if(curr.get(1)>=start)
+            {
+                ArrayList<Integer> ar=new ArrayList<>();
+                ar.add(curr.get(0));
+                ar.add(Math.max(curr.get(1),end)); 
+                stack.push(ar);
+            }
+            else
+            {
+                 ArrayList<Integer> q=new ArrayList<>();
+                q.add(intervals[i].start);
+                 q.add(intervals[i].finish); 
+        stack.push(curr);
+        stack.push(q);
+               
+            }
+            
+            
+        }
+        List<Interval> ans=new ArrayList<>();
+        int n=stack.size();
+        for(int i=n-1;i>=0;i--)
+        {
+            ArrayList<Integer> curr=stack.pop();
+            Interval ae=new Interval(curr.get(0),curr.get(1));
+            ans.add(ae);
+           
+        }
+        Collections.sort(ans,(ak,b)->(ak.start-b.start));
+        return ans;
+    }
+}
