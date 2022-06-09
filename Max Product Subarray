@@ -1,0 +1,20 @@
+import java.util.ArrayList;
+
+public class Solution {
+	public static int maximumProduct(ArrayList<Integer> nums, int n) {
+		// Write your code here.
+         int max=nums.get(0);
+        int min=nums.get(0);
+        int ans=nums.get(0);
+        
+        for(int i=1;i<nums.size();i++)
+        {
+            int temp=max;
+            max=Math.max(min*nums.get(i),Math.max(max*nums.get(i),nums.get(i)));
+            min=Math.min(temp*nums.get(i),Math.min(min*nums.get(i),nums.get(i)));
+            ans=Math.max(max,ans);
+        }
+        return ans;
+        
+	}
+}
