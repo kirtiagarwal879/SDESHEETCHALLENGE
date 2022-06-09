@@ -1,0 +1,46 @@
+import java.util.* ;
+import java.io.*;
+public class Solution {
+    public static int helper(ArrayList<Integer> arr,int start,int end,int key)
+    {
+        while(end-start>1)
+        {
+            int m=start+(end-start)/2;
+            if(arr.get(m)>=key)
+            {
+                end=m;
+            }
+            else
+            {
+                start=m;
+            }
+        }
+        return end;
+    }
+
+	public static int longestIncreasingSubsequence(int arr[]) {
+        if(arr.length==0)
+        {
+            return 0;
+        }
+		//Your code goes here
+        int len=0;
+        ArrayList<Integer> temp=new ArrayList<>();
+        temp.add(arr[0]);
+        for(int i=1;i<arr.length;i++)
+        {
+            if(arr[i]>temp.get(temp.size()-1))
+            {
+                temp.add(arr[i]);
+                len++;
+            }
+            else
+            {
+                int idx=helper(temp,-1,temp.size()-1,arr[i]);
+                temp.set(idx,arr[i]);
+            }
+        }
+        return temp.size();
+	}
+
+}
