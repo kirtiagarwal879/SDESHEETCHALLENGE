@@ -1,0 +1,44 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static long getTrappedWater(long[] h, int n) {
+        // Write your code here.
+          //int n=h.length;
+        int left=0;
+        int right=n-1;
+        long leftmax=0;
+        long rightmax=0;
+        long ans=0;
+        
+        while(left<=right)
+        {
+            if(h[left]<=h[right])
+            {
+                if(h[left]>=leftmax)
+                {
+                    leftmax=h[left];
+                }
+                else
+                {
+                    ans=ans+(leftmax-h[left]);
+                }
+                left++;
+            }
+            else
+            {
+                if(h[right]>=rightmax)
+                {
+                    rightmax=h[right];
+                }
+                else
+                {
+                    ans=ans+(rightmax-h[right]);
+                }
+                
+                right--;
+            }
+        }
+        
+        return ans;
+    }
+}
