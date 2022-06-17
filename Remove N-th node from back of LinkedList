@@ -1,0 +1,77 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+	
+	Following is the structure of the Singly Linked List.
+	
+	class LinkedListNode<T> {
+    	T data;
+    	LinkedListNode<T> next;
+
+    	public LinkedListNode(T data) {
+        	this.data = data;
+    	}
+	}
+
+****************************************************************/
+
+public class Solution {
+     public static LinkedListNode reverseList(LinkedListNode head) {
+        if(head==null)
+        {
+            return head;
+        }
+        if(head.next==null)
+        {
+            return head;
+        }
+        
+        LinkedListNode prev=null;
+        LinkedListNode curr=head;
+        LinkedListNode next=curr.next;
+        while(curr.next!=null)
+        {
+             
+            
+               
+                curr.next=prev;
+                prev=curr;
+                curr=next;
+                next=next.next;
+           
+        }
+        
+        curr.next=prev;
+            prev=curr;
+            
+        return prev;
+        
+    }
+	public static LinkedListNode<Integer> removeKthNode(LinkedListNode<Integer> head, int n) {
+		// Write your code here.
+        if(head==null)
+        {
+            return null;
+        }
+        
+        head= reverseList(head);
+        
+        if(n==1)
+        {
+            return reverseList(head.next);
+        }
+        
+        LinkedListNode temp=head;
+        LinkedListNode prev=head;
+        for(int i=1;i<n;i++)
+        {
+            prev=temp;
+            temp=temp.next;
+            
+        }
+        
+        prev.next=temp.next;
+        
+        return reverseList(head);
+	}
+}
