@@ -1,0 +1,99 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the Node class:
+
+    class LinkedListNode {
+        int data;
+        LinkedListNode next;
+        
+        public LinkedListNode(int data) {
+            this.data = data;
+        }
+    }
+
+*****************************************************************/
+
+
+public class Solution {
+    static LinkedListNode addTwoNumbers(LinkedListNode head1, LinkedListNode head2) {
+        LinkedListNode temp1=head1;
+        LinkedListNode temp2=head2;
+        int carry=0;
+        LinkedListNode ans=null;
+        LinkedListNode tail=null;
+        while(temp1!=null && temp2!=null)
+        {
+            int data=temp1.data+temp2.data+carry;
+            carry=data/10;
+            data=data%10;
+            
+            if(ans==null)
+            {
+                LinkedListNode newnode=new LinkedListNode(data);
+                ans=newnode;
+                tail=newnode;
+            }
+            else
+            {
+                LinkedListNode newnode=new LinkedListNode(data); 
+                tail.next=newnode;
+                tail=newnode;
+            }
+            temp1=temp1.next;
+            temp2=temp2.next;
+        }
+         while(temp1!=null)
+        {
+            int data=temp1.data+carry;
+            carry=data/10;
+            data=data%10;
+            
+            if(ans==null)
+            {
+                LinkedListNode newnode=new LinkedListNode(data);
+                ans=newnode;
+                tail=newnode;
+            }
+            else
+            {
+                LinkedListNode newnode=new LinkedListNode(data); 
+                tail.next=newnode;
+                tail=newnode;
+            }
+            temp1=temp1.next;
+            //temp2=temp2.next;
+        }
+         while( temp2!=null)
+        {
+            int data=temp2.data+carry;
+            carry=data/10;
+            data=data%10;
+            
+            if(ans==null)
+            {
+               LinkedListNode newnode=new LinkedListNode(data);
+                ans=newnode;
+                tail=newnode;
+            }
+            else
+            {
+                LinkedListNode newnode=new LinkedListNode(data); 
+                tail.next=newnode;
+                tail=newnode;
+            }
+           // temp1=temp1.next;
+            temp2=temp2.next;
+        }
+        
+        if(carry==1)
+        {
+           LinkedListNode newnode=new LinkedListNode(carry);
+            tail.next=newnode;
+            tail=newnode;
+        }
+        
+        return ans;
+    }
+}
