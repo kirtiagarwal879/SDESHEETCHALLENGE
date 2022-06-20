@@ -1,0 +1,83 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+    Following is the class structure of the LinkedListNode class:
+	
+	class LinkedListNode<T> {
+    	T data;
+    	LinkedListNode<T> next;
+
+    	public LinkedListNode(T data) {
+        	this.data = data;
+            
+    	}
+	}
+
+*****************************************************************/
+
+public class Solution {
+     public static LinkedListNode reverseList(LinkedListNode head) {
+        if(head==null)
+        {
+            return head;
+        }
+        if(head.next==null)
+        {
+            return head;
+        }
+        
+        LinkedListNode prev=null;
+        LinkedListNode curr=head;
+        LinkedListNode next=curr.next;
+        while(curr.next!=null)
+        {
+             
+            
+               
+                curr.next=prev;
+                prev=curr;
+                curr=next;
+                next=next.next;
+           
+        }
+        
+        curr.next=prev;
+            prev=curr;
+            
+        return prev;
+        
+    }
+
+	public static boolean isPalindrome(LinkedListNode<Integer> head) {
+        if(head==null || head.next==null)
+        {
+            return true;
+        }
+		
+	    LinkedListNode slow=head;
+        LinkedListNode fast=head;
+        
+        while(fast.next!=null && fast.next.next!=null)
+        {
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        slow.next=reverseList(slow.next);
+        LinkedListNode temp=head;
+        slow=slow.next;
+        
+        while(slow!=null)
+        {
+            if((int)temp.data!=(int)slow.data)
+            {
+                return false;
+            }
+            slow=slow.next;
+            temp=temp.next;
+        }
+        
+        return true;
+      
+    }
+}
