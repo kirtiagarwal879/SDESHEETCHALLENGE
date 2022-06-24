@@ -1,0 +1,41 @@
+import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    public static ArrayList<ArrayList<Integer>> combinationSum2(ArrayList<Integer> c, int n, int t)
+    {
+         ArrayList<ArrayList<Integer>> ans=new ArrayList<>();
+        Collections.sort(c);
+        helper(c,0,t,ans,new ArrayList<>());
+        
+        return ans;
+        
+    }
+     public static void helper(ArrayList<Integer> arr,int i,int target,ArrayList<ArrayList<Integer>> ans,ArrayList<Integer> temp)
+    {
+         
+       
+            if(target==0 )
+            {
+                ans.add(new ArrayList<>(temp));
+                return;
+            }
+            
+         for(int j=i;j<arr.size();j++)
+         {
+             if(j!=i && arr.get(j)==arr.get(j-1))
+             {
+                 continue;
+             }
+             if(arr.get(j)<=target)
+             {
+                 temp.add(arr.get(j));
+                 helper(arr,j+1,target-arr.get(j),ans,temp);
+                 temp.remove(temp.size()-1);
+             }
+         }
+         return;
+    }
+}
