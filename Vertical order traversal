@@ -1,0 +1,106 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+    class TreeNode<T> 
+    {
+       public:
+        T data;
+        TreeNode<T> left;
+        TreeNode<T> right;
+
+        TreeNode(T data) 
+        {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    };
+
+************************************************************/
+
+import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+    public static ArrayList<Integer> verticalOrderTraversal(TreeNode<Integer> root) 
+    {
+      ArrayList<Integer> ans=new ArrayList<>();
+        List<List<Integer>> r=verticalTraversal(root);
+        for(int i=0;i<r.size();i++)
+        {
+            for(int j=0;j<r.get(i).size();j++)
+            {
+                ans.add(r.get(i).get(j));
+            }
+        }
+        return ans;
+    }
+     public static class pair
+    {
+       TreeNode r=null;
+        int i;
+        pair(TreeNode r,int i)
+        {
+            this.r=r;
+            this.i=i;
+        }
+    }
+    public static List<List<Integer>> verticalTraversal(TreeNode root) {
+        int min=Integer.MAX_VALUE;
+        int max=Integer.MIN_VALUE;
+        HashMap<Integer,List<Integer>> map=new HashMap<>();
+        List<List<Integer>> ans=new ArrayList<>();
+        if(root==null)
+        {
+            return ans;
+        }
+        Queue<pair> queue=new LinkedList<>();
+        queue.add(new pair(root,0));
+        
+        while(queue.size()>0)
+        {
+            int size=queue.size();
+            for(int i=0;i<size;i++)
+            {
+            pair curr=queue.poll();
+            TreeNode v=curr.r;
+            int c=curr.i;
+            min=Math.min(min,c);
+            max=Math.max(max,c);
+            if(map.containsKey(c))
+            {
+               map.get(c).add((int)v.data);
+                
+            }
+            else
+            {
+                List<Integer> arr=new ArrayList<>();
+                map.put(c,arr);
+                map.get(c).add((int)v.data);
+            }
+            
+            if(v.left!=null)
+            {
+                queue.add(new pair(v.left,c-1));
+            }
+            if(v.right!=null)
+            {
+                queue.add(new pair(v.right,c+1));
+            }
+            }
+           
+        }
+        
+        for(int i=min;i<=max;i++)
+        {
+            List<Integer> a=map.get(i);
+            ans.add(a);
+        }
+        
+        return ans;
+        
+    }
+}
