@@ -1,0 +1,19 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+	static int kthLargest(ArrayList<Integer> nums, int size, int k) {
+		PriorityQueue<Integer> pq=new PriorityQueue<>(Collections.reverseOrder());
+        for(int i=0;i<nums.size();i++)
+        {
+            pq.add(nums.get(i));
+        }
+        int ans=-1;
+        for(int i=0;i<k;i++)
+        {
+            ans=pq.poll();
+        }
+        return ans;
+	}
+}
