@@ -1,0 +1,47 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+  public static String fourSum(int[] nums, int t, int n) {
+      // Write your code here.
+       Arrays.sort(nums);
+        for(int i=0;i<n;i++)
+        {
+            if(i>0 && nums[i]==nums[i-1])
+            {
+                continue;
+            }
+            
+            for(int j=i+1;j<n;j++)
+            {
+                if(j>0 && nums[j]==nums[j-1])
+                {
+                    continue;
+                }
+                
+                int ele=t-nums[i]-nums[j];
+                int q=j+1;
+                int w=n-1;
+                while(q<w)
+                {
+                    if(nums[q]+nums[w]==ele)
+                    {
+                       return "Yes";
+                      
+                    }
+                    else if(nums[q]+nums[w]<ele)
+                    {
+                        q++;
+                    }
+                    else
+                    {
+                        w--;
+                    }
+                        
+                }
+                
+            }
+        }
+        
+        return "No";
+  }
+}
