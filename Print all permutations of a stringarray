@@ -1,0 +1,39 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static List<String> findPermutations(String s) {
+        // Write your code here.
+        List<String> ans=new ArrayList<>();
+        StringBuilder str=new StringBuilder(s);
+        helper(ans,str,0);
+        return ans;
+            
+    }
+     public static void helper( List<String> ans,StringBuilder s,int i)
+    {
+        if(i==s.length())
+        {
+           String temp="";
+            for(int k=0;k<s.length();k++)
+            {
+                temp=temp+s.charAt(k);
+            }
+            ans.add(temp);
+            return;
+        }
+        
+        
+        for(int j=i;j<s.length();j++)
+        {
+            char ch=s.charAt(j);
+            s.setCharAt(j,s.charAt(i));
+            s.setCharAt(i,ch);
+            helper(ans,s,i+1);
+            ch=s.charAt(j);
+            s.setCharAt(j,s.charAt(i));
+            s.setCharAt(i,ch);
+            
+        }
+    }
+}
