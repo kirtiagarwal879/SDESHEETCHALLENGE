@@ -1,0 +1,27 @@
+public class Solution {
+    public static boolean areAnagram(String a, String b){
+        // Write your code here.
+          int[] f1=new int[26];
+       int[] f2=new int[26];
+       
+       for(int i=0;i<a.length();i++)
+       {
+           char ch=a.charAt(i);
+           f1[ch-'a']++;
+       }
+        for(int i=0;i<b.length();i++)
+       {
+           char ch=b.charAt(i);
+           f2[ch-'a']++;
+       }
+       
+       for(int i=0;i<26;i++)
+       {
+           if(f1[i]!=f2[i])
+           {
+               return false;
+           }
+       }
+       return true;
+    }
+}
