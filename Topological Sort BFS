@@ -1,0 +1,65 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution 
+{
+    public static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> edges, int v, int e) 
+    {
+        int[] indegree=new int[v];
+        ArrayList<ArrayList<Integer>> graph=new ArrayList<>();
+        for(int i=0;i<v;i++)
+        {
+            graph.add(new ArrayList<>());
+        }
+        
+        for(int i=0;i<edges.size();i++)
+        {
+             int u=edges.get(i).get(0);
+            int u1=edges.get(i).get(1);
+            graph.get(u).add(u1);
+            indegree[u1]++;
+        }
+       
+        Queue<Integer> queue=new LinkedList<>();
+        ArrayList<Integer> ans=new ArrayList<>();
+        boolean[] visited=new boolean[v];
+        
+        for(int i=0;i<indegree.length;i++)
+        {
+            if(indegree[i]==0)
+            {
+                queue.add(i);
+            }
+        }
+        
+        
+        
+        while(queue.size()!=0)
+        {
+            int size=queue.size();
+            for(int i=0;i<size;i++)
+            {
+                int a=queue.poll();
+                if(visited[a]==true)
+                {
+                    continue;
+                }
+                visited[a]=true;
+                ans.add(a);
+                for(int u: graph.get(a))
+                {
+                    if(visited[u]==false)
+                    {
+                        indegree[u]--;
+                        if(indegree[u]==0)
+                        {
+                            queue.add(u);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return ans;
+    }
+}
