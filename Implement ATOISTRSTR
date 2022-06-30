@@ -1,0 +1,33 @@
+public class Solution {
+     
+    public static int atoi(String str) {
+       int ans=0;
+          boolean flag=false;
+        
+        if(str.charAt(0)=='-')
+        {
+            flag=true;
+        }
+        else if(Character.isDigit(str.charAt(0))==true)
+        {
+             ans=(int)(str.charAt(0)-'0');
+        }
+        
+        for(int i=1;i<str.length();i++)
+        {
+         char ch=str.charAt(i);
+        
+        if(Character.isDigit(ch)==true)
+        {
+       ans=ans*10+(int)(ch-'0');
+          
+        }
+        }
+       if(flag==true)
+       {
+           ans=ans*(-1);
+       }
+       
+       return ans;
+    }
+}
