@@ -1,0 +1,48 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static List<List<String>> partition(String s) {
+          List<List<String>> ans=new ArrayList<>();
+        
+        helper(ans,0,s,new ArrayList<>());
+        return ans;
+    }
+    public static boolean ispalindrome(String s)
+    {
+        int i=0;
+        int j=s.length()-1;
+        while(i<=j)
+        {
+            if(s.charAt(i)!=s.charAt(j))
+            {
+                return false;
+            }
+            i++;
+            j--;
+                
+        }
+        return true;
+    }
+    
+    
+    public static void helper( List<List<String>> ans,int i,String s,List<String> temp)
+    {
+        if(i==s.length())
+        {
+            ans.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        for(int j=i;j<s.length();j++)
+        {
+            String str=s.substring(i,j+1);
+            if(ispalindrome(str))
+            {
+                temp.add(str);
+                helper(ans,j+1,s,temp);
+                temp.remove(temp.size()-1);
+            }
+        }
+    }
+}
