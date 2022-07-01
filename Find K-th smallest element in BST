@@ -1,0 +1,47 @@
+/************************************************************
+
+    Following is the TreeNode class structure
+
+	class TreeNode<T> 
+	{
+	    public T data;
+	    public TreeNode<T> left;
+	    public TreeNode<T> right;
+
+	    TreeNode(T data) 
+	    {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	    }
+	}
+
+************************************************************/
+import java.io.*;
+import java.util.*;
+
+public class Solution 
+{
+
+	public static int kthSmallest(TreeNode<Integer> A, int B) 
+	{
+		//  Write your code here.
+          ArrayList<Integer> in=new ArrayList<>();
+        inorder(A,in);
+        
+        return in.get(B-1);
+    }
+    
+    public static void inorder(TreeNode<Integer> A,ArrayList<Integer> in)
+    {
+        if(A==null)
+        {
+            return;
+        }
+        
+        inorder(A.left,in);
+        in.add((int)A.data);
+        inorder(A.right,in);
+	}
+
+}
