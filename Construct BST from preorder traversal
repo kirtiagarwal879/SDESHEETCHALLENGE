@@ -1,0 +1,62 @@
+ 
+ 
+/*************************************************************
+	Following is the Binary Tree node structure
+	class TreeNode<T> {
+		public T data;
+		public TreeNode<T> left;
+		public TreeNode<T> right;
+
+		TreeNode(T data) {
+			this.data = data;
+			left = right = null;
+		}
+
+};************************************************************/
+public class Solution {
+    public static TreeNode<Integer> preOrderTree(int[] preOrder) {
+         int n=preOrder.length;
+        TreeNode ans;
+        if(n==0)
+        {
+            ans=null;
+            return ans;
+        }
+        
+        ans=helper(preOrder,0,preOrder.length-1,0);
+        return ans;
+    }
+
+ public static TreeNode helper(int[] A,int start,int end,int idx)
+    {
+        if(end<start)
+        {
+            return null;
+        }
+        
+        int midx=-1;
+        int element=A[idx];
+     TreeNode root=new TreeNode(element);
+        for(int i=start+1;i<=end;i++)
+        {
+            if(A[i]>element)
+            {
+                midx=i;
+                break;
+            }
+        }
+        
+        if(midx==-1)
+        {
+          root.left=helper(A,start+1,end,start+1);
+          return root;
+
+        }
+        
+       root.left=helper(A,start+1,midx-1,start+1);
+       root.right=helper(A,midx,end,midx);
+        
+        return root;
+    }
+	
+}
