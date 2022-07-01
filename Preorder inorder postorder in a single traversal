@@ -1,0 +1,45 @@
+/************************************************************
+
+	Following is the Binary Tree node structure:
+
+	class BinaryTreeNode<T> {
+	    T data;
+	    BinaryTreeNode<T> left;
+	    BinaryTreeNode<T> right;
+
+	    public BinaryTreeNode(T data) {
+	        this.data = data;
+	    }
+	}
+
+************************************************************/
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static List<List<Integer>> getTreeTraversal(BinaryTreeNode<Integer> root) {
+        List<List<Integer>> ans=new ArrayList<>();
+        List<Integer> in=new ArrayList<>();
+        List<Integer> pre=new ArrayList<>();
+        List<Integer> post=new ArrayList<>();
+        helper(pre,in,post,root);
+        ans.add(in);
+        ans.add(pre);
+        ans.add(post);
+        return ans;
+    }
+    
+    public static void helper(List<Integer> pre,List<Integer> in,List<Integer> post,BinaryTreeNode root)
+    {
+        if(root==null)
+        {
+            return;
+        }
+         pre.add((int)root.data);
+        helper(pre,in,post,root.left);
+         in.add((int)root.data);
+        helper(pre,in,post,root.right);
+        post.add((int)root.data);
+    }
+    
+}
