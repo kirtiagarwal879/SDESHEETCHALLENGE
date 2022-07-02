@@ -1,0 +1,47 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static double median(int[] a, int[] b) {
+    	ArrayList<Integer> arr=new ArrayList<>();
+        int i=0;
+        int j=0;
+        while(i<a.length && j<b.length)
+        {
+            if(a[i]<=b[j])
+            {
+                arr.add(a[i]);
+                i++;
+            }
+            else
+            {
+                arr.add(b[j]);
+                j++;
+            }
+        }
+        while(i<a.length)
+        {
+             arr.add(a[i]);
+                i++;
+        }
+        while(j<b.length)
+        {
+            arr.add(b[j]);
+                j++;
+        }
+        
+        int n=arr.size();
+        if(n%2!=0)
+        {
+            double ans=(double)arr.get(n/2);
+            return ans;
+        }
+        else
+        {
+            double a1=(double)arr.get(n/2-1);
+            double a2=(double)arr.get(n/2);
+            double ans=(a1+a2)/2;
+            return ans;
+        }
+    }
+}
