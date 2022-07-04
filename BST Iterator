@@ -1,0 +1,75 @@
+/*
+    Definition of Node class for reference
+
+    class TreeNode<T> 
+    {
+        public T data;
+        public TreeNode<T> left;
+        public TreeNode<T> right;
+
+        TreeNode(T data)
+        {
+            this.data = data;
+            left = null;
+            right = null;
+        }
+    }
+
+*/
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+
+    static class BSTIterator{
+        static ArrayList<Integer> in;
+        static TreeNode<Integer> root;
+        static int i; 
+        BSTIterator(TreeNode<Integer> root){
+            this.root=root;
+            i=-1;
+            in=new ArrayList<>();
+           inorder(root,in);
+        }
+        public static void inorder(TreeNode<Integer> root,ArrayList<Integer> in)
+        {
+            if(root==null)
+            {
+                return;
+            }
+            inorder(root.left,in);
+            in.add((int)root.data);
+            inorder(root.right,in);
+        }
+
+        int next(){
+            i++;
+            if(i<in.size())
+            {
+                
+                return in.get(i);
+                
+            }
+            
+            return -1;
+            
+        }
+
+        boolean hasNext(){
+            if(i>=in.size()-1)
+            {
+                return false;
+            }
+            return true;
+        }
+    }
+}
+
+/*
+    Your BSTIterator object will be instantiated and called as such:
+    BSTIterator iterator = new BSTIterator(root);
+    while(iterator.hasNext())
+    {
+       print(iterator.next()+" ");
+    }
+*/
