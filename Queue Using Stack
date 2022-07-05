@@ -1,0 +1,58 @@
+import java.util.*;
+import java.io.*;
+
+public class Queue {
+   static Stack<Integer> stack;
+    static Stack<Integer> temp;
+    Queue() {
+       stack=new Stack<>();
+        temp=new Stack<>();
+    }
+
+    void enQueue(int val) {
+       stack.push(val);
+    }
+
+    int deQueue() {
+        if(stack.size()==0)
+        {
+            return -1;
+        }
+       while(stack.size()!=0)
+       {
+           temp.push(stack.pop());
+       }
+        int ans=temp.pop();
+        while(temp.size()!=0)
+        {
+            stack.push(temp.pop());
+        }
+        return ans;
+    }
+
+    int peek() {
+        if(stack.size()==0)
+        {
+            return -1;
+        }
+         while(stack.size()!=0)
+       {
+           temp.push(stack.pop());
+       }
+        int ans=temp.peek();
+        while(temp.size()!=0)
+        {
+            stack.push(temp.pop());
+        }
+        
+        return ans;
+    }
+
+    boolean isEmpty() {
+       if(stack.size()==0)
+        {
+            return true;
+        }  
+        return false;
+    }
+}
