@@ -1,0 +1,58 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+
+    static class MinStack {
+        
+        static Stack<Integer> stack;
+        static Stack<Integer> minstack;
+        // Constructor
+        MinStack() {
+            stack=new Stack<>();
+            minstack=new Stack<>();
+            
+        }
+        void push(int num) {
+         stack.push(num);
+            if(minstack.size()==0)
+            {
+                minstack.push(num);
+                return;
+            }
+            if(minstack.size()!=0 && num<minstack.peek())
+            {
+                minstack.push(num);
+            }
+        }
+
+        int pop() {
+          if(stack.size()==0)
+          {
+              return -1;
+          }
+            int a=stack.pop();
+            if(a==minstack.peek())
+            {
+                minstack.pop();
+            }
+            return a;
+        }
+
+        int top() {
+          if(stack.size()==0)
+          {
+              return -1;
+          }
+            return stack.peek();
+        }
+
+        int getMin() {
+           if(minstack.size()==0)
+          {
+              return -1;
+          }
+            return minstack.peek();
+        }
+    }
+}
