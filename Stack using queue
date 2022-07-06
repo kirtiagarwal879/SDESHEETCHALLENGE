@@ -1,0 +1,48 @@
+import java.io.*;
+import java.util.*;
+
+public class Stack {
+
+    
+    static Queue<Integer> queue;
+    static int size;
+    public Stack() {
+        queue=new LinkedList<>();
+        size=-1;
+    }
+ public int getSize() { 
+       return queue.size();
+    }
+    public boolean isEmpty() {
+        if(queue.size()==0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void push(int element) {
+        size++;
+        queue.add(element);
+        for(int i=0;i<size;i++)
+       {
+           queue.add(queue.poll());
+       }
+
+    }
+    public int pop() {
+      if(queue.size()!=0)
+       {
+           int popped = queue.poll();
+           size--;
+           return popped;
+       }
+       return -1;
+    }
+
+    public int top() {
+       if(queue.size()!=0)
+           return queue.peek();
+       return -1;
+    }
+}
