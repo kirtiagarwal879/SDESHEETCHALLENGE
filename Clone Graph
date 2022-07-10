@@ -1,0 +1,55 @@
+/***************************************************************************
+
+  Class for graph node is as follows:
+
+  class graphNode {
+      public int data;
+      public ArrayList<graphNode> neighbours;
+
+      graphNode() {
+          data = 0;
+          neighbours = new ArrayList<graphNode>();
+      }
+
+      graphNode(int val) {
+          data = val;
+          neighbours = new ArrayList<graphNode>();
+      }
+
+      graphNode(int val, ArrayList<graphNode> neighbours) {
+          data = val;
+          this.neighbours = neighbours;
+      }
+    }
+
+******************************************************************************/
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static graphNode cloneGraph(graphNode node) {
+        if(node==null)
+        {
+            return null;
+        }
+      HashMap<graphNode,graphNode> map=new HashMap<>();
+        Queue<graphNode> queue=new LinkedList<>();
+        graphNode ansnode=new graphNode(node.data,new ArrayList<>());
+        queue.add(node);
+        map.put(node,ansnode);
+        while(queue.size()!=0)
+        {
+            graphNode curr=queue.poll();
+           for(graphNode u: curr.neighbours)
+           {
+               if(!map.containsKey(u))
+               {
+                 map.put(u,new graphNode(u.data,new ArrayList<>()));  
+               }
+               map.get(curr).neighbours.add(map.get(u));
+               
+           }
+        }
+        return map.get(node);
+    }
+}
