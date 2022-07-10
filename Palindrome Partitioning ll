@@ -1,0 +1,42 @@
+public class Solution {
+    
+    public static boolean ispalindrome(int i,int j,String str)
+    {
+        int n=str.length();
+        int q=i;
+        int w=j;
+        while(q<=w)
+        {
+            if(str.charAt(q)!=str.charAt(w))
+            {
+                return false;
+            }
+            q++;
+            w--;
+        }
+        
+        return true;
+        
+    }
+	public static int palindromePartitioning(String str) {
+        int n=str.length();
+	     int[] dp=new int[n+1];
+        dp[n]=0;
+    
+        for(int i=n-1;i>=0;i--)
+        {
+            int cost=Integer.MAX_VALUE;
+            for(int j=i;j<n;j++)
+            {
+                if(ispalindrome(i,j,str))
+                {
+                    int c=1+dp[j+1];
+                    cost=Math.min(cost,c);
+                }
+            }
+            dp[i]=cost;
+            
+        }
+        return dp[0]-1;
+	}
+}
