@@ -1,0 +1,40 @@
+/*************************************************************
+
+    Following is the Binary Tree node structure
+
+    class BinaryTreeNode<Integer> {
+        int data;
+        BinaryTreeNode<Integer> left;
+        BinaryTreeNode<Integer> right;
+
+        public BinaryTreeNode(int data) {
+            this.data = data;
+        }
+    }
+
+ *************************************************************/
+
+public class Solution {
+    public static boolean validateBST(BinaryTreeNode<Integer> root) {
+        if(root==null)
+        {
+            return true;
+        }
+        if(root.left!=null)
+        {
+            if((int)root.data<(int)root.left.data)
+            {
+                return false;
+            }
+        }
+         if(root.right!=null)
+        {
+            if((int)root.data>(int)root.right.data)
+            {
+                return false;
+            }
+        }
+        
+        return  validateBST(root.left)&&  validateBST(root.right);
+    }
+}
