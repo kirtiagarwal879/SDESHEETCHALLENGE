@@ -1,0 +1,88 @@
+import java.util.* ;
+import java.io.*; 
+/****************************************************************
+
+       Following is the class structure of the Node class:
+
+       class Node {
+	int data;
+	Node next;
+	Node child;
+
+	public Node(int data) {
+		this.data = data;
+		this.next = null;
+		this.child = null;
+	}
+}
+
+*****************************************************************/
+public class Solution {
+     public static Node sortedmerge(Node head1,Node head2)
+    {
+        int flag=0;
+        Node temp=null;
+        Node head=null;
+        while(head1!=null && head2!=null)
+        {
+            if(head1.data<head2.data)
+            {
+                if(flag==0)
+                {
+                    head=head1;
+                    temp=head1;
+                }
+            else
+            {
+                temp.child=head1;
+                temp=temp.child;
+            }
+            head1=head1.child;
+            }
+            else
+            {
+                if(flag==0)
+                {
+                    head=head2;
+                    temp=head2;
+                }
+                else
+                {
+                    temp.child=head2;
+                    temp=temp.child;
+                }
+                head2=head2.child;
+            }
+            flag=-1;
+        }
+        while(head1!=null)
+        {
+            temp.child=head1;
+            temp=temp.child;
+            head1=head1.child;
+        }
+        while(head2!=null)
+        {
+            temp.child=head2;
+            temp=temp.child;
+            head2=head2.child;
+        }
+        return head;
+    }
+	public static Node flattenLinkedList(Node root) {
+		if(root==null)
+        return root;
+        
+        Node h1=root;
+        Node h2=null;
+        while(h1.next!=null)
+        {
+            h2=h1.next;
+            h1.next=h2.next;
+            h1=sortedmerge(h1,h2);
+            
+        }
+        return h1;
+	}
+}
+
