@@ -1,0 +1,43 @@
+
+import java.util.ArrayList;
+
+public class Solution 
+{
+
+	public static ArrayList<Integer> getMaximumOfSubarrays(ArrayList<Integer> nums, int k) 
+	{
+		ArrayList<Integer> ans=new ArrayList<>();
+        if(nums.size()<k)
+        {
+            return ans;
+        }
+        int n=nums.size();
+        ArrayList<Integer> temp=new ArrayList<>(k);
+        int j;
+        int max=0;
+        for(j=0;j<Math.min(n,k);j++)
+        {
+            temp.add(nums.get(j));
+            max=Math.max(max,nums.get(j));
+        }
+        ans.add(max);
+        int i=0;
+        while(j<n)
+        {
+            if(temp.size()!=0)
+            temp.remove(0);
+            
+            temp.add(nums.get(j));
+            max=0;
+            for(int q=0;q<temp.size();q++)
+            {
+                max=Math.max(max,temp.get(q));
+            }
+            ans.add(max);
+            j++;
+            i++;
+        }
+        
+        return ans;
+	}
+}
