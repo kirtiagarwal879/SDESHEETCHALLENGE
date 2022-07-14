@@ -1,0 +1,54 @@
+/*************************************************************************
+
+    Following is the class structure of the Node class:
+
+	class TreeNode<T> {
+	    public T data;
+	    public TreeNode<T> left;
+	    public TreeNode<T> right;
+
+	    TreeNode(T data) {
+	        this.data = data;
+	        left = null;
+	        right = null;
+	    }
+	}
+
+*************************************************************************/
+
+public class Solution {
+    public static class pair
+    {
+        int minValue;
+        int maxValue;
+        int maxSize;
+        pair(int minValue, int maxValue, int maxSize)
+        {
+          this.minValue = minValue;
+        this.maxValue = maxValue;
+        this.maxSize = maxSize;
+        }
+        
+    }
+    public static pair largestBSTHelper(TreeNode<Integer> root)
+    {
+        if(root==null)
+        {
+            return new pair(Integer.MAX_VALUE,Integer.MIN_VALUE,0);
+        }
+        pair left=largestBSTHelper(root.left);
+        pair right=largestBSTHelper(root.right);
+        
+         if(left.maxValue < root.data && root.data < right.minValue)
+        {
+            return new pair(Math.min(root.data, left.minValue), Math.max(root.data, right.maxValue), left.maxSize + right.maxSize + 1);
+        }
+        // Otherwise, return [-inf, inf] so that parent can't be valid BST
+        return new pair(Integer.MIN_VALUE, Integer.MAX_VALUE, Math.max(left.maxSize, right.maxSize));
+        
+    }
+	public static int largestBST(TreeNode<Integer> root) {
+		pair p=largestBSTHelper(root);
+        return p.maxSize;
+	}
+}
