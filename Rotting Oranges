@@ -1,0 +1,61 @@
+import java.util.*;
+import java.io.*;
+public class Solution {
+    static int[][] dirs={{-1,0},{1,0},{0,1},{0,-1}};
+	public static int minTimeToRot(int[][] grid, int n, int m) {
+        int fresh=0;
+        Queue<int[]> queue=new LinkedList<>();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(grid[i][j]==2)
+                {
+                    queue.add(new int[]{i,j});
+                    
+                    
+                }
+                else if(grid[i][j]==1)
+                {
+                    fresh++;
+                }
+            }
+        }
+        int cnt=0;
+        while(queue.size()!=0)
+        {
+            int size=queue.size();
+            for(int i=0;i<size;i++)
+            {
+                int[] curr=queue.poll();
+           
+            for(int[] dir:dirs)
+            {
+                int ni=curr[0]+dir[0];
+                int nj=curr[1]+dir[1];
+                if(ni>=0 && ni<grid.length && nj>=0 && nj<grid[0].length && grid[ni][nj]==1)
+                {
+                    queue.add(new int[]{ni,nj});
+                    grid[ni][nj]=2;
+                    fresh--;
+                }
+            }
+            }
+            
+            cnt++;
+        }
+        if(fresh>0)
+        {
+            return -1;
+        }
+        if(cnt<=0)
+        {
+            return 0;
+        }
+        return cnt-1;
+       
+       
+        
+	}
+
+}
