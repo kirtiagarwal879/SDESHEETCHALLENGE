@@ -1,0 +1,38 @@
+/*****************************************************************
+
+    Following is the representation for the Binary Tree Node:
+
+    class BinaryTreeNode<T> {
+        T data;
+        BinaryTreeNode<T> left;
+        BinaryTreeNode<T> right;
+
+        public BinaryTreeNode(T data) {
+            this.data = data;
+        }
+    }
+
+****************************************************************/
+
+public class Solution {
+    public static boolean helper(BinaryTreeNode<Integer> root1,BinaryTreeNode<Integer> root2)
+    { if(root1==null && root2==null)
+    {
+        return true;
+    }
+        
+        if(root1==null || root2==null)
+        {
+            return false;
+        }
+        
+        return (((int)root1.data==(int)root2.data)&&helper(root1.left,root2.right) && helper(root1.right,root2.left));
+    }
+    public static boolean isSymmetric(BinaryTreeNode<Integer> root) {
+       if(root==null ||  root.left==null && root.right==null)
+       {
+           return true;
+       }
+       return helper(root.left,root.right); 
+    }
+}
